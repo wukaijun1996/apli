@@ -5,7 +5,7 @@
 # @Software: PyCharm
 import re
 import requests
-
+import csv
 # url = "https://movie.douban.com/top250?start=0&filter="
 
 headers = {
@@ -13,7 +13,7 @@ headers = {
 }
 
 
-for n in range(1,11):
+for n in range(1,2):
     print("当前处于第 {} 页".format(n))
     n = (n-1)*25
     url = "https://movie.douban.com/top250?start={}&filter=".format(n)
@@ -22,7 +22,10 @@ for n in range(1,11):
     # print(reps.text)
     html = reps.text
     # movie_resp = re.compile(r'<div class="item">.*?<span class="title">(.*?)</span>?', re.S)
-    movie_resp = re.compile(r'<div class="item">.*?<span class="title">(?P<name>.*?)</span>?', re.S)
+    movie_resp = re.compile(r'<div class="item">.*?<span class="title">(?P<name>.*?)'
+                            r'</span>.*?<p class="">.*?<br>(?P<year>.*?)'
+                            r'&nbsp.*?<span class="rating_num" property="v:average">(?P<score>.*?)'
+                            r'</span>.*?<span>(?P<num>.*?)人评价</span>', re.S)
     # res = movie_resp.findall(html)
     res = movie_resp.finditer(html)
     # print(res)
@@ -31,10 +34,28 @@ for n in range(1,11):
     #     n +=1
         # print("第{}部电影: {}".format(n, i))
 
+    # with open("data.csv",'a',encoding="utf-8") as fp:
+    #     csvwriter = csv.writer(fp)
+    #
+    #     for it in res:
+    #
+    #         # print(it.group("year").strip())
+    #         # print(it.groupdict())
+    #         dic = it.groupdict()
+    #         dic["year"] = dic["year"].strip()
+    #         print(dic)
+    #         csvwriter.writerow(dic.values())
+
+    f = open("data.csv", 'w',encoding="utf-8")
+    csvwriter = csv.writer(f)
     for it in res:
-        print(it.group("name"))
-
-
+        # print(it.group("year").strip())
+        # print(it.groupdict())
+        dic = it.groupdict()
+        dic["year"] = dic["year"].strip()
+        print(dic)
+        csvwriter.writerow(dic.values())
+    f.close()
 
 
 
