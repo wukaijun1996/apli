@@ -22,8 +22,8 @@ parm = {
 
 resp = requests.get(url=url,params=parm,headers=headers)
  
-print(resp.url)
-print(resp.request.url)
-print(resp.request.headers)
+# print(resp.url)
+# print(resp.request.url)
+# print(resp.request.headers)
 print(resp.json())
 print(resp.text)
