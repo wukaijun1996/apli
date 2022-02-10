@@ -41,15 +41,24 @@ class Chatroom(tornado.websocket.WebSocketHandler):
 
     #连接：当有新用户连接我时，会自动调用
     def open(self, *args: str, **kwargs):
-        print("有用户连接我了")
+        uname = self.get_cookie('uname')
+        print("有用户连接我了{}".format(uname))
+        # 有用户加入聊天室时，加入到online_users中
+        self.online_users.append(self)
 
     #接收消息：接收前端浏览器发过来的消息
     def on_message(self, message):
         print("接收前端浏览器发过来的消息",message)
+        # 获取当前用户名
+        uname = self.get_cookie('uname')
+        #群发给每个在线用户
+        for user in self.online_users:
+            user.write_message(f'[{uname}]:{message}')
 
     #关闭：有用户退出聊天室会自动调用
     def on_close(self):
         print('有用户已经退出聊天室')
+        self.online_users.remove(self)
 
 
 
@@ -58,7 +67,7 @@ def make_app():
         handlers= [
             (r'/login/',Login), #登录页面的路由
             (r'/chat/', Chat), #聊天室页面的路由
-            (r'chatroom',Chatroom)
+            (r'/chatroom/',Chatroom)
         ]
     )
     return app

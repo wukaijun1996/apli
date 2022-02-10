@@ -12,5 +12,46 @@
         当前用户：{{ uname }}
     </p>
 
+    <div style="width: 400px; height: 300px; border: 1px solid gray">
+        <div id="chatmsg">
+<!--            <p>[李磊]： I love you</p>-->
+<!--            <p>[王梅]： I have laowang</p>-->
+        </div>
+    </div>
+
+    <div>
+        <input type="text" id="msg">
+        <button id="send">发送</button>
+    </div>
+
+    <script>
+        // 主动连接服务器的websocket
+        ws = new WebSocket('ws://127.0.0.1:8886/chatroom/');
+
+        // 发送信息给服务器
+        send.onclick = function () {
+            //将输入框的内容（msg.value）发送给服务器
+            ws.send(msg.value);
+            // 清空输入框
+            msg.value = ""
+        };
+
+
+        // 接收服务器发送过来的消息
+        ws.onmessage = function (e) {
+            //console.log(e.data)
+            //创建一个空的P标签
+            p = document.createElement('p');
+            //将内容添加到P标签中
+            p.innerHTML = e.data;
+            //将p标签添加到页面中
+            chatmsg.appendChild(p);
+
+        }
+
+
+
+    </script>
+
 </body>
 </html>
