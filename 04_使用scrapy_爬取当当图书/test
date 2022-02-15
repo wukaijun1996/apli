@@ -1,0 +1,15 @@
+
+创建scrapy 项目
+scrapy startproject 项目的名字
+
+跳转到spiders文件夹下
+cd  项目名字/项目名字/spiders
+
+创建一个爬虫文件
+scrapy genspider 爬虫文件名字   要爬取的域名
+
+
+scrapy crawl 爬虫文件的名字
+
+
+
