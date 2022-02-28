@@ -40,3 +40,22 @@
         </li>
         
         https://www.nuget.org/packages/Selenium.chrome.WebDriver/
+        
+        
+        
+        from selenium.webdriver import Chrome
+import time
+from selenium.webdriver.common.keys import Keys
+from threading import Thread
+from selenium.webdriver.support.select import Select
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+
+
+opt = Options()
+# opt.add_argument("--headless")
+opt.add_argument("--disbale-gpu")
+
+web = Chrome(options=opt)
+web.maximize_window()
+web.implicitly_wait(30)
