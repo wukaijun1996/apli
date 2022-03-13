@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        textarea {
+            resize: none;
+            width: 480px;
+        }
+        table{
+            background-color: red;
+            text-align: center;
+            width: 600px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <form action="" method="post">
+        <table border="1">
+            <tr>
+                <td width="100px">姓名</td>
+                <td>
+                    <input type="text" name="username">
+                </td>
+                <td>姓名</td>
+                <td>
+                    <select name="sex" >
+                        <option value="">----请选择性别----</option>
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                    </select></td>
+
+            </tr>
+            <tr>
+                <td>手机号</td>
+                <td>
+                    <input type="text" name="phone">
+                </td>
+                <td>电子邮箱</td>
+                <td>
+                    <input type="text" name="email">
+                </td>
+            </tr>
+            <tr>
+                <td>教育程度</td>
+                <td>
+                    <select name="edu" >
+                        <option >小学</option>
+                        <option >初中</option>
+                        <option >高中</option>
+                        <option >大专</option>
+                        <option >本科</option>
+                    </select>
+                </td>
+                <td>工作职位</td>
+                <td><input type="text" name="job"></td>
+            </tr>
+            <tr>
+                <td>工作城市</td>
+                <td>
+                    <select name="city" id="">
+                        <option >--请选择城市---</option>
+                        <option >北京</option>
+                        <option >上海</option>
+                        <option >广州</option>
+                        <option >深圳</option>
+                    </select>
+                </td>
+                <td>期望薪资</td>
+                <td>
+                    <select name="salary" id="">
+                        <option >--请选择区间---</option>
+                        <option >6k-10k</option>
+                        <option >10k-15k</option>
+                        <option >15k-20k</option>
+                        <option >20k-30k</option>
+                        </select>
+                </td>
+            </tr>
+            <tr>
+                <td>自我介绍</td>
+                <td colspan="3">
+                    <textarea name="introduce" ></textarea>
+                </td>
+        <!--        <td></td>-->
+        <!--        <td></td>-->
+            </tr>
+            <tr>
+                <td>特长</td>
+                <td colspan="3">
+                    <textarea name="skill" ></textarea>
+                </td>
+        <!--        <td></td>-->
+        <!--        <td></td>-->
+            </tr>
+            <tr>
+                <td>地址</td>
+                <td colspan="3">
+                    <textarea name="address" ></textarea>
+                </td>
+        <!--        <td></td>-->
+        <!--        <td></td>-->
+            </tr>
+            </table>
+        <input type="submit">
+    </form>
+
+    
+</body>
+</html>
