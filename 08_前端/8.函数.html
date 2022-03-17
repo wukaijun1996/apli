@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script type="text/javascript">
+
+    function getLower(str1){
+
+        var lowerStr = '';
+        for (var i=0;i < str1.length ;i++){
+            if (str1.charAt(i)>= 'a' && str1.charAt(i) <= 'z'){
+                lowerStr += str1.charAt(i)
+            }
+        }
+        return lowerStr
+    }
+    var low = getLower('abcDEfGHijKLmn')
+    console.log(low)
+
+    //拥有属性和行为的这种结构的数据  ，给对象添加属性和行为
+    var person = {
+        name:"王敏",
+        age : 20,
+        eat : function () {
+            console.log(this.name + '在吃饭')
+        }
+    }
+
+    person.eat();
+    console.log(person.age) ;
+
+    console.log(person.name) ;
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>
