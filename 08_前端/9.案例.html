@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+
+    <ol id="list">
+
+    </ol>
+    <button id="add">添加</button>
+    <button id="sub">移除</button>
+
+    <script>
+        var fruits = ['苹果','香蕉','鸭梨','榴莲'];
+
+        var list = document.getElementById('list');
+        var addPos = 0;
+        var addBtn = document.getElementById('add');
+        addBtn.onclick = function () {
+
+            if (addPos >= fruits.length) {
+                alert("水果已经展示完了");
+            }else{
+                var fruit = fruits[addPos];
+                var li_node = document.createElement('li');
+                li_node.innerText = fruit;
+                list.appendChild(li_node);
+                addPos++;
+            }
+        }
+
+        var subBtn = document.getElementById('sub');
+        subBtn.onclick = function () {
+                var li_node = document.querySelector('#list > li');
+                console.log(li_node)
+                if (li_node == null){
+                    alert('没有可删的水果')
+                }else {
+                    list.removeChild(li_node);
+                }
+            }
+
+
+
+    </script>
+
+
+
+</body>
+</html>

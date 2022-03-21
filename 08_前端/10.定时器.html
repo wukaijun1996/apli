@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        #box {
+            /*text-align: center;*/
+            width: 600px;
+            margin: 0px auto;
+            position: relative;
+        }
+        #cd {
+            width: 600px;
+            height: 337.5px;
+            background-color: palegreen;
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: white;
+            text-align: right;
+
+        }
+        #cd span{
+            color: peru;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="box">
+    <img src="./img/1-3.png" width="600">
+
+    <div id="cd">
+        距离广告还剩<span>16</span>秒
+    </div>
+</div>
+
+<script>
+    var span_node = document.querySelector('#cd span');
+
+    var second = parseInt(span_node.innerText);
+
+    var cd = document.getElementById('cd')
+
+    var timeid = setInterval(function () {
+
+        second--;
+        span_node.innerText = format_time(second);
+
+        if (second == 0){
+            clearInterval(timeid) //清楚对应的定时器
+            cd.style.display = 'none'
+        }
+
+    },1000);
+
+
+    //格式化数据
+    function format_time(time) {
+        if (time >= 10){
+            return time;
+    } else{
+        return '0' + time
+    }
+
+    }
+
+
+
+
+</script>
+
+
+
+
+</body>
+</html>
