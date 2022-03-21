@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #time {
+            width: 200px;
+            margin: 50px auto;
+        }
+        #time span {
+            border: 2px paleturquoise solid;
+            padding: 10px;
+        }
+
+
+    </style>
+
+
+</head>
+<body>
+
+
+<div id="time">
+    <span id="hour">00</span>时
+    <span id="minute">00</span>分
+    <span id="second">00</span>秒
+</div>
+
+
+<script>
+    //获取时间标签
+    var hour_span = document.getElementById('hour')
+    var minute_span = document.getElementById('minute')
+    var second_span = document.getElementById('second')
+
+    // 获取初始时间
+    var hour = parseInt(hour_span.innerText);
+    var minute = parseInt(minute_span.innerText);
+    var second = parseInt(second_span.innerText);
+
+    var timeid = setInterval(function () {
+        second++;
+        if (second == 5){
+            minute++;
+            second = 0;
+
+            if (minute == 5){
+                hour++;
+                minute = 0;
+            }
+                if (hour == 2){
+                    hour = 0;
+                }
+        }
+
+        hour_span.innerText = time_format(hour);
+        minute_span.innerText = time_format(minute);
+        second_span.innerText = time_format(second);
+
+    },1000)
+
+    function time_format(time) {
+        if (time >= 10){
+            return time;
+        }else {
+            return '0' + time ;
+        }
+
+    }
+
+
+
+</script>
+
+
+
+
+</body>
+</html>
