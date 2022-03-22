@@ -1,0 +1,5 @@
+
+pip install flask  写项目的框架
+
+pip install flask-script   扩展插件  已指令的形式启动项目或者操作数据库
+
