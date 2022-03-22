@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/jquery-3.6.0.min.js" type="text/javascript"></script>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+        }
+
+    </style>
+
+
+</head>
+<body>
+    <div></div>
+    <button class="show">显示</button>
+    <button class="hide">隐藏</button>
+
+    <script>
+        $('.hide').click(function () {
+            // $('div').css('display','none')
+            $('div').hide(10000,function () {
+                alert('已经完成隐藏的动作 触发的函数')
+            })
+        })
+
+        $('.show').click(function () {
+                $('div').show(5000,function () {
+                    alert('已经完成显示的动作')
+            })
+        })
+
+
+
+
+    </script>
+
+</body>
+</html>
