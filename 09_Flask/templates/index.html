@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+    <h1>欢迎{{ username }}进入Flask首页</h1>
+    <h1>展示班级年级学生信息</h1>
+
+    {% if students %}
+
+        <table border="1" cellspacing="0">
+            <tr>
+                <td>姓名</td>
+                <td>年龄</td>
+                <td>成绩</td>
+            </tr>
+            {% for stu in students %}
+            <tr>
+                <td>{{ stu.get('name') }}</td>
+                <td>{{ stu.get('age') }}</td>
+                <td>{{ stu.get('score') }}</td>
+            </tr>
+            {% endfor%}
+
+        </table>
+    {% else %}
+        <p style="color: red;">还没有学生信息</p>
+    {%endif%}
+
+
+</body>
+</html>
