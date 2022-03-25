@@ -47,6 +47,37 @@ for --循环语法
     循环操作
 {% endfor %}
 
+mysql -u root -p
+ps  123456
+开启： net start MySql2021
+关闭：net stop MySql2021
+create database book_1 charset utf8;   #创建数据库
+use book_1   #用到哪一个数据库
+show tables;  #用到哪一个表
+desc peopleinfo;  #表的详细信息
+select * from bookinfo;  查看表里面的数据
+
+ORM 对象关系映射
+
+pymysql 用来连接数据库
+flask-sqlalchemy  支持允许进行对象关系映射
+flask-migration  数据库迁移  结构发生变化，及时同步到数据库中
+
+
+pip install mysqlclient
+
+
+迁移数据库的指令
+python 项目的启动文件名 设置的操作数据库迁移的指令名 init  --初始化一个迁移仓库 用于存放每次修改的版本
+
+eg:
+python manage2.py database init
+
+python manage2.py database migrate   -- 根据模型生成迁移版本
+python manage2.py database upgrade   --把模型同步到数据库中
+（数据库更新时执行以上两条，记得注释upgrade里面删其他库的操作 ）
+
+python manage2.py database downgrade    --版本回退
 
 
 
