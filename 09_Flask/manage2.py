@@ -14,7 +14,7 @@ from flask_migrate import Migrate,MigrateCommand
 
 
 app = Flask(__name__)
-app.config['ENV'] = 'developmeng'
+app.config['ENV'] = 'development'
 app.config['DEBUG'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:123456@127.0.0.1:3306/book_1'
 
@@ -50,6 +50,7 @@ if __name__ == '__main__':
 
 
     manager.run()
+
 
 
 
