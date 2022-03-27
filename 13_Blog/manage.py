@@ -3,6 +3,7 @@
 # @Author : wu
 # @File : manage.py 
 # @Software: PyCharm
+from flask import render_template
 from flask_script import Manager
 from apps import create_app
 from flask_migrate import Migrate,MigrateCommand
@@ -20,7 +21,7 @@ manager.add_command("database",MigrateCommand)
 
 @app.route('/')
 def index():
-    return '首页尼玛'
+    return render_template('index.html')
 
 
 
