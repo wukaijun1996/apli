@@ -62,7 +62,7 @@ ORM 对象关系映射
 pymysql 用来连接数据库
 flask-sqlalchemy  支持允许进行对象关系映射
 flask-migration  数据库迁移  结构发生变化，及时同步到数据库中
-
+flask-wtf 跨站请求伪造保护
 
 pip install mysqlclient
 
@@ -78,6 +78,19 @@ python manage2.py database upgrade   --把模型同步到数据库中
 （数据库更新时执行以上两条，记得注释upgrade里面删其他库的操作 ）
 
 python manage2.py database downgrade    --版本回退
+
+
+
+模板继承
+
+写页面的时候  把相同的部分放在同一个模板文件中  需要时可以继承自这个模板
+
+子模板中有扩展怎么扩展：
+需要在父模板中设置 对应的可填充的位置
+
+{# 设置可填充的位置 #}
+{#  {% block 位置名 %} {% endblock %} #}
+{% block body %} {% endblock %}
 
 
 

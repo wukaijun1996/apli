@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="{{ url_for('login') }}" method="post">
+        {# 向网站传递受保护的令牌   获取令牌值的方式#}
+    <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+    <div>用户名：<input type="text" name="username"></div>
+    <div>密码：<input type="password" name="psw" ></div>
+    <div><input type="submit" value="登录"></div>
+
+</form>
+
+
+
+</body>
+</html>
