@@ -61,7 +61,7 @@ def search():
     print(stus)
 
     stu = Student.query.filter(Student.score > 80).first()
-    print(stu)
+    print(stu.score)
     # 获取姓李学生的个数
     count = Student.query.filter(Student.name.startswith('李')).count()
     print(count)
@@ -99,11 +99,33 @@ def search():
 # 修改
 @app.route('/update/')
 def update():
+    print(request.url)  #http://127.0.0.1:5000/update/?id=4
+    print(request.args)   #ImmutableMultiDict([('id', '4')])
+    id = int(request.args.get('id'))  # 4
+
+    # 根据id获取到要修改的学生
+    stu = Student.query.get(id)
+    print(stu.score)
+
+    stu.score = 88
+    db.session.commit()
+
     return "修改成功"
 
+@app.route('/delete/')
+def delete():
+    print(request.url)  #http://127.0.0.1:5000/update/?id=4
+    print(request.args)   #ImmutableMultiDict([('id', '4')])
+    id = int(request.args.get('id'))  # 4
 
+    # 根据id获取到要修改的学生
+    stu = Student.query.get(id)
+    # 删除
+    db.session.delete(stu)
+    # 提交
+    db.session.commit()
 
-
+    return '删除成功'
 
 
 
