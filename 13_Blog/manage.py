@@ -8,6 +8,8 @@ from flask_script import Manager
 from apps import create_app
 from flask_migrate import Migrate,MigrateCommand
 from exts import db
+from apps.models.blogmodels import User
+
 
 app = create_app()
 

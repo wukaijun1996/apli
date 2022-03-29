@@ -11,7 +11,7 @@ from views.movie import movie_bp
 from views.music import music_bp
 
 app = Flask(__name__)
-app.config['ENV'] = 'developmeng'
+app.config['ENV'] = 'development'
 app.config['DEBUG'] = True
 
 # 合并小分支到主项目下
