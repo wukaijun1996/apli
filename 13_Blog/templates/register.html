@@ -7,6 +7,9 @@
 {% block body %}
 <div class="container">
         <form class="form-horizontal" method="post" action="{{ url_for('user.register') }}">
+
+            <input type="hidden" class="csrf_token" name="csrf_token" value="{{ csrf_token() }}">
+
       <div class="form-group">
         <label for="inputname" class="col-sm-2 control-label">用户名</label>
         <div class="col-sm-10">
@@ -57,7 +60,7 @@
         $.ajax({
             url:'{{ url_for('user.check_name') }}',
             type:'post',
-            data:'username=' + $('#inputname').val(),
+            data:'username=' + $('#inputname').val() + '&csrf_token=' + $('.csrf_token').val(),
         {#    获取响应结果#}
             success:function (result,status) {
                 console.log(result)
@@ -81,7 +84,7 @@
         $.ajax({
             url:'{{ url_for('user.check_phone') }}',
             type:'post',
-            data:'phone=' + $('#inputphone').val(),
+            data:'phone=' + $('#inputphone').val() + '&csrf_token=' + $('.csrf_token').val(),
         {#    获取响应结果#}
             success:function (result,status) {
                 console.log(result)
