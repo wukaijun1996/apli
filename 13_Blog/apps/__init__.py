@@ -7,6 +7,7 @@
 from flask import Flask
 from exts import db
 from apps.views.user import user_bp
+from apps.views.blog import blog_bp
 from flask_wtf import CSRFProtect
 
 
@@ -18,5 +19,6 @@ def create_app():
     CSRFProtect(app)
 
     app.register_blueprint(user_bp)
+    app.register_blueprint(blog_bp)
 
     return app

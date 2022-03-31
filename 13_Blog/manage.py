@@ -3,12 +3,13 @@
 # @Author : wu
 # @File : manage.py 
 # @Software: PyCharm
-from flask import render_template
+from flask import render_template,url_for,redirect
 from flask_script import Manager
 from apps import create_app
 from flask_migrate import Migrate,MigrateCommand
 from exts import db
-from apps.models.blogmodels import User
+from apps.models.blogmodels import *
+import urlpath
 
 
 app = create_app()
@@ -23,7 +24,8 @@ manager.add_command("database",MigrateCommand)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    urlpath.current_url = url_for('index')
+    return redirect(url_for('blog.blogindex'))
 
 
 

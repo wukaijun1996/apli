@@ -31,9 +31,11 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">首页<span class="sr-only">(current)</span></a></li>
-            <li><a href="#">发表博客</a></li>
+          <ul class="nav navbar-nav select">
+
+            <li><a href="{{url_for('blog.blogindex')}}">首页<span class="sr-only">(current)</span></a></li>
+            <li><a href="{{ url_for('blog.publish') }}">发表博客</a></li>
+
           </ul>
 
           <form class="navbar-form navbar-left">
@@ -69,7 +71,21 @@
     {% endblock %}
 
     {% block js %}
-    
+
+
+        <script>
+
+        {#点击哪个导航位置 哪一个处于选中状态#}
+        $('.select > li' ).click(function () {
+
+            $('.select > li').attr('class','')
+            $(this).attr('class','active')
+        })
+
+        </script>
+
+
+
     {% endblock %}
 
 

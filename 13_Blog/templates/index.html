@@ -4,3 +4,57 @@
 {% block title %}
 首页
 {% endblock %}
+
+
+{% block body %}
+
+    <div class="container">
+
+        {% if blogs %}
+
+            {% for blog in blogs %}
+                <div class="box">
+
+                <h2><a href="">{{ blog.title }}</a></h2>
+
+                <p>{{ blog.thum_content }}</p>
+
+                    <div>
+                        <span>{{ blog.user.username }}</span>
+
+                        <div>
+                            <span class="glyphicon glyphicon-thumbs-up"></span>
+                            <span>数量</span>
+                        </div>
+                    </div>
+
+                </div>
+            {% endfor %}
+
+
+
+        {% else %}
+            <h3>当前还没有人发表博客 快去发布吧</h3>
+        {% endif %}
+
+
+    </div>
+
+{% endblock %} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

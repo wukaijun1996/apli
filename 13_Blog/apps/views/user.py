@@ -7,6 +7,7 @@
 from flask import Blueprint, request, render_template, redirect, url_for, session
 from apps.models.blogmodels import User
 from exts import db
+import urlpath
 
 user_bp = Blueprint('user',__name__,url_prefix='/user')
 
@@ -72,7 +73,7 @@ def login():
             session['username'] = username  #存储用户名
             print(session)
 
-            return redirect(url_for('index'))
+            return redirect(urlpath.current_url)
         else:
             return render_template('login.html',message = "登录失败")
 

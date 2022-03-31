@@ -17,6 +17,7 @@ class User(db.Model):
     # 属性名隐式添加在博客类型中  获取到发表博客的用户信息
     blogs = db.relationship('Blog',backref='user')
 
+    like_blogs = db.relationship('Blog',secondary = 'like')
 
     def __init__(self,username,password,phone):
         self.username = username
@@ -36,6 +37,10 @@ class Blog(db.Model):
     # 谁发表的  -- 外键  联系两张表
     # db.ForeignKey('user.uid') 关联的是哪张表的哪个字段  将这两张表联系起来
     uid = db.Column(db.Integer,db.ForeignKey('user.uid'))
+
+
+
+    like_users = db.relationship('User',secondary = 'like')
 
     def __init__(self,title,content,uid):
         self.title = title
