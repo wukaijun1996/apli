@@ -5,27 +5,67 @@
 首页
 {% endblock %}
 
+{% block css %}
+
+    <style>
+            .box{
+                border-radius: 10px;
+                border: 1px solid gray;
+                margin-top: 10px;
+                padding: 10px 30px;
+            }
+            .thum{
+                font-size: 20px;
+
+            }
+            .user{
+                float: left;
+            }
+            .like{
+                float: right;
+             }
+            .clear{
+                {#撑起来用户点赞的标签#}
+                clear: both;
+            }
+
+
+    </style>
+
+
+
+{% endblock %}
+
 
 {% block body %}
-
     <div class="container">
-
         {% if blogs %}
-
             {% for blog in blogs %}
+
                 <div class="box">
 
-                <h2><a href="">{{ blog.title }}</a></h2>
+                    <h3 class="title">
+                        <a href="">{{ blog.title }}</a>
+                    </h3>
 
-                <p>{{ blog.thum_content }}</p>
+                    <p class="thum">{{ blog.thum_content }}</p>
 
-                    <div>
-                        <span>{{ blog.user.username }}</span>
+                    <div class="user_like">
 
-                        <div>
-                            <span class="glyphicon glyphicon-thumbs-up"></span>
-                            <span>数量</span>
-                        </div>
+                            <div class="user">
+                                <span>{{ blog.user.username }}</span>
+                            </div>
+
+
+                            <div class="like">
+                                <span class="glyphicon glyphicon-thumbs-up"></span>
+    {#                            点赞的数量 表示给这个博客点赞的用户个数#}
+    {#                            容器数据|length 获取容器数据的个数#}
+                                <span>{{ blog.like_users|length }}</span>
+                            </div>
+
+                            <div class="clear"></div>
+
                     </div>
 
                 </div>
