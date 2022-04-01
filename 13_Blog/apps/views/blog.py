@@ -50,6 +50,44 @@ def blogindex():
     return render_template('index.html',blogs=blogs)
 
 
+# 设置点赞路由
+@blog_bp.route('/like/')
+def like():
+    print(request.args)
+    if session.get("username"):
+        # 获取点赞需要的数据
+        user = User.query.filter(User.username == session.get('username')).first()
+        # 获取博客的ID
+        bid = int(request.args.get('bid'))
+        blog = Blog.query.get(bid)  #根据bid获取当前博客对象
+        like = Like(user.uid,bid)
+        db.session.add(like)
+        db.session.commit()
+
+        # print(type(bid))
+        print(f'当前{session.get("username")}用户点赞的博客 {user.like_blogs}')
+        print(f'当前这篇博客的喜爱者有 {blog.like_users}')
+        return redirect(url_for('blog.blogindex'))
+    else:
+        urlpath.current_url = url_for('blog.blogindex')
+        # 跳转到登录页面
+        return redirect(url_for('user.login'))
+
+@blog_bp.route('/unlike/')
+def unlike():
+    # 获取点赞需要的数据
+    user = User.query.filter(User.username == session.get('username')).first()
+    # 获取博客的ID
+    bid = int(request.args.get('bid'))
+    blog = Blog.query.get(bid)  # 根据bid获取当前博客对象
+
+    # 在like中查询这条记录
+    like = Like.query.filter(Like.uid == user.uid,Like.bid == bid).first()
+    db.session.delete(like)
+    db.session.commit()
+    print("删除点赞成功")
+    return redirect(url_for('blog.blogindex'))
+
 
 
 

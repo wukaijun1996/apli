@@ -56,7 +56,9 @@ class Like(db.Model):
     # 博客id 联系的是博客表中id
     bid = db.Column(db.Integer, db.ForeignKey('blog.bid'))
 
-
+    def __init__(self,uid,bid):
+        self.uid = uid
+        self.bid = bid
 
 
 
