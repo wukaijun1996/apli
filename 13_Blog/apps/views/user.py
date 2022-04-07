@@ -84,6 +84,23 @@ def exit():
     print(session)
     return redirect(url_for('index'))
 
+@user_bp.route('/updateicon/',methods=['GET','POST'])
+def updateicon():
+    if request.method == 'GET':
+        return render_template('updateicon.html')
+    else:
+        # 接收数据
+        print(request.form)
+        # 接收图片数据
+        print(request.files)  #ImmutableMultiDict([('icon', <FileStorage: 'notepad++.exe' ('application/x-msdownload')>)])
+
+        # 把文件存储到本地
+        icon = request.files.get('icon')
+
+        # print(basepath)
+
+        return '修改成功'
+
 
 
 
