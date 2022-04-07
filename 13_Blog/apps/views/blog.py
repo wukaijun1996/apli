@@ -42,12 +42,19 @@ def publish():
 # 首页内容展示
 @blog_bp.route('/index/')
 def blogindex():
+    print(url_for('static', filename='default.jpg'))
 
     # 查询所有的博客，把它渲染在首页上
     blogs = Blog.query.all()
     print(blogs)
-
-    return render_template('index.html',blogs=blogs)
+    if session.get('username'):
+        user = User.query.filter(User.username == session.get('username')).first()
+        print(user.like_blogs)
+        # 要拿到用户点过哪些博客 （列表） 传参  ， 在页面判断当前博客bid是否在列表中
+        like_bids = [blog.bid for blog in user.like_blogs]
+        return render_template('new_index.html',blogs=blogs,like_bids = like_bids)
+    else:
+        return render_template('new_index.html',blogs=blogs)
 
 
 # 设置点赞路由
@@ -89,7 +96,37 @@ def unlike():
     return redirect(url_for('blog.blogindex'))
 
 
+# 既接收点赞的请求 也接受取消点赞的请求
+@blog_bp.route('/likeorunlike/')
+def likeorunlike():
 
+    if session.get('username'):
+        # 获取操作的博客id
+        bid = int(request.args.get('bid'))
+        # 根据bid获取到博客对象
+        blog = Blog.query.get(bid)
+        # 获取用户信息
+        user = User.query.filter(User.username == session.get('username')).first()
+        # 区分用户要进行点赞还是进行取消
+        flag = False
+        for like_user in blog.like_users:
+            if like_user.username == session.get('username'):
+                flag = True
+                break
+        if flag is True:
+            # 取消点赞
+            like = Like.query.filter(Like.uid == user.uid,Like.bid == bid).first()
+            db.session.delete(like)
+            db.session.commit()
+        else:
+            # 进行点赞
+            like = Like(user.uid,bid)
+            db.session.add(like)
+            db.session.commit()
+        return redirect(url_for('blog.blogindex'))
+    else:
+        urlpath.current_url = url_for('blog.blogindex')
+        return redirect(url_for('user.login'))
 
 
 

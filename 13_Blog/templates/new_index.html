@@ -1,0 +1,102 @@
+{# 继承自base#}
+{% extends 'base.html' %}
+
+{% block title %}
+首页
+{% endblock %}
+
+{% block css %}
+
+    <style>
+            .box{
+                border-radius: 10px;
+                border: 1px solid gray;
+                margin-top: 10px;
+                padding: 10px 30px;
+            }
+            .thum{
+                font-size: 20px;
+
+            }
+            .user{
+                float: left;
+            }
+            .like{
+                float: right;
+             {# 设置鼠标样式  #}
+                cursor: pointer;
+             }
+            .clear{
+                {#撑起来用户点赞的标签#}
+                clear: both;
+            }
+
+
+    </style>
+
+
+
+{% endblock %}
+
+
+{% block body %}
+    <div class="container">
+        {% if blogs %}
+            {% for blog in blogs %}
+                <div class="box">
+
+                    <h3 class="title">
+                        <a href="">{{ blog.title }}</a>
+                    </h3>
+
+                    <p class="thum">{{ blog.thum_content }}</p>
+
+                    <div class="user_like">
+
+                            <div class="user">
+                                <img src="{{ url_for('static',filename='default.jpg') }}" alt="">
+                                <span>{{ blog.user.username }}</span>
+                            </div>
+
+
+                            <div class="like" bid="{{ blog.bid }}" >
+                                <a href="{{ url_for('blog.likeorunlike') }}?bid={{ blog.bid }}">
+                                    {% if  blog.bid in like_bids %}
+                                    <span class="glyphicon glyphicon-thumbs-up" style="color: red"></span>
+                                    {% else %}
+                                        <span class="glyphicon glyphicon-thumbs-up" ></span>
+                                    {% endif %}
+
+    {#                            点赞的数量 表示给这个博客点赞的用户个数#}
+    {#                            容器数据|length 获取容器数据的个数#}
+                                <span>{{ blog.like_users|length }}</span>
+                                </a>
+                            </div>
+
+
+                            <div class="clear"></div>
+                    </div>
+                </div>
+
+            {% endfor %}
+        {% else %}
+            <h3>当前还没有人发表博客 快去发布吧</h3>
+        {% endif %}
+    </div>
+{% endblock %} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -11,6 +11,10 @@ class User(db.Model):
     username = db.Column(db.String(20), nullable=False, unique=True)
     password = db.Column(db.String(20),nullable=False)
     phone = db.Column(db.String(11), unique=True)
+
+    # 表示用户的头像
+    user_icon = db.Column(db.String(100))
+
     # 这个用户发表了哪些博客
     # 这些博客的类型
     #backref = ‘属性名’
@@ -23,6 +27,7 @@ class User(db.Model):
         self.username = username
         self.password = password
         self.phone = phone
+        # self.user_icon = None
 
 
 # 博客模型
@@ -55,6 +60,8 @@ class Like(db.Model):
     uid = db.Column(db.Integer, db.ForeignKey('user.uid'))
     # 博客id 联系的是博客表中id
     bid = db.Column(db.Integer, db.ForeignKey('blog.bid'))
+
+
 
     def __init__(self,uid,bid):
         self.uid = uid
