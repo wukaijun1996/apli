@@ -3,6 +3,9 @@
 # @Author : wu
 # @File : user.py 
 # @Software: PyCharm
+import os
+import basepath
+import uuid   #生成唯一标识的模块
 
 from flask import Blueprint, request, render_template, redirect, url_for, session
 from apps.models.blogmodels import User
@@ -95,11 +98,32 @@ def updateicon():
         print(request.files)  #ImmutableMultiDict([('icon', <FileStorage: 'notepad++.exe' ('application/x-msdownload')>)])
 
         # 把文件存储到本地
-        icon = request.files.get('icon')
+        icon_file = request.files.get('icon')   #icon_file.filename  拿到这个数对应的文件名
+        # print(icon_file.filename)
 
-        # print(basepath)
+        if icon_file.filename:
 
-        return '修改成功'
+            # 生成一个图片的唯一标识
+            image_id= uuid.uuid4()
+            print(image_id)
+            # 从后面查找 .第一次出现的位置（返回索引）
+            dot_pos = icon_file.filename.rfind('.')
+            image_name = str(image_id) + icon_file.filename[dot_pos:]
+
+            # save_path = basepath.basedir + '/static/icon' + icon_file.filename
+            save_path = os.path.join(basepath.basedir,'static\icon',image_name)
+            print(save_path)
+            icon_file.save(save_path)
+
+            user = User.query.filter(User.username == session.get('username')).first()
+            user.user_icon = 'icon/' + image_name
+
+            db.session.commit()
+
+        return redirect(url_for('blog.blogindex'))
+
+
+
 
 
 

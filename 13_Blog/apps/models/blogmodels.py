@@ -12,7 +12,7 @@ class User(db.Model):
     password = db.Column(db.String(20),nullable=False)
     phone = db.Column(db.String(11), unique=True)
 
-    # 表示用户的头像
+    # 表示用户的头像 的路径
     user_icon = db.Column(db.String(100))
 
     # 这个用户发表了哪些博客

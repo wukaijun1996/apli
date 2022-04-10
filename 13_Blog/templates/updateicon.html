@@ -13,7 +13,7 @@
           <div class="form-group">
             <label for="exampleInputFile">上传头像</label>
             <input type="file" id="exampleInputFile" name="icon">
-              <img src="{{ url_for('static',filename='default.jpg') }}" width="100px">
+              <img src="{{ url_for('static',filename='icon/default.jpg') }}" width="100px" class="iconimage">
           </div>
 
           <button type="submit" class="btn btn-default">上传头像</button>
@@ -23,6 +23,23 @@
 
 {% endblock %}
 
+{% block js %}
+    <script>
+        {#  点击选择文件 选中文件并确定以后  标签内容发生了变化 触发了change事件    #}
+        var inputfile = document.getElementById('exampleInputFile');
+    {#    添加事件#}
+        inputfile.onchange = function () {
+        {#    获取到这个上文的input选中的图片资源#}
+            var files = inputfile.files;
+            console.log(files)
+            {#console.log(files[0])#}
+        {#    把上传的图片设置对应一个地址 可以根据这个地址定位到这个图片#}
+            var imageurl = window.URL.createObjectURL(files[0]);
+            console.log(imageurl)
+        {#    把图片地址赋值给img的src #}
+            $('.iconimage').attr('src',imageurl)
+        }
 
 
-
+    </script>
+{% endblock %}

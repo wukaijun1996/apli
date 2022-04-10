@@ -42,7 +42,7 @@ def publish():
 # 首页内容展示
 @blog_bp.route('/index/')
 def blogindex():
-    print(url_for('static', filename='default.jpg'))
+    # print(url_for('static', filename='default.jpg'))
 
     # 查询所有的博客，把它渲染在首页上
     blogs = Blog.query.all()

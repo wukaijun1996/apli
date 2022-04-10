@@ -54,13 +54,22 @@
                     <div class="user_like">
 
                             <div class="user">
-                                <img src="{{ url_for('static',filename='default.jpg') }}" width="30px">
+                                {% if blog.user.user_icon %}
+                                    <img src="{{ url_for('static',filename=blog.user.user_icon) }}" width="30px">
+                                {% else %}
+                                <img src="{{ url_for('static',filename='icon/default.jpg') }}" width="30px">
+                                {% endif %}
                                 <span>{{ blog.user.username }}</span>
                             </div>
 
 
                             <div class="like" bid="{{ blog.bid }}" >
-                                <a href="{{ url_for('blog.likeorunlike') }}?bid={{ blog.bid }}">
+                            {% if session.get('username')%}
+                                <a class="likea">
+                                {% else %}
+                                    <a href="{{ url_for('user.login') }}">
+                            {% endif %}
+
                                     {% if  blog.bid in like_bids %}
                                     <span class="glyphicon glyphicon-thumbs-up" style="color: red"></span>
                                     {% else %}
@@ -86,7 +95,12 @@
 {% endblock %} 
 
 
+{% block is %}
 
+
+
+
+{% endblock %}
 
 
 
