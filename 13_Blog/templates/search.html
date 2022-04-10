@@ -2,7 +2,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-首页
+搜索
 {% endblock %}
 
 {% block css %}
@@ -41,8 +41,8 @@
 
 {% block body %}
     <div class="container">
-        {% if paginate %}
-            {% for blog in paginate.items %}
+
+            {% for blog in blogs %}
                 <div class="box">
 
                     <h3 class="title">
@@ -73,12 +73,9 @@
                             {% else %}
                                 <a href="{{ url_for('user.login') }}">
                             {% endif %}
-{#                            添加删除标记#}
-                            {% if session.get('username') == blog.user.username%}
-                                <a href="" class="delete">删除</a>
-                            {% endif %}
+
                                 {% if  blog.bid in like_bids %}
-                                    <span class="glyphicon glyphicon-thumbs-up likehand" style="color: red"></span>
+                                <span class="glyphicon glyphicon-thumbs-up likehand" style="color: red"></span>
                                 {% else %}
                                     <span class="glyphicon glyphicon-thumbs-up likehand" ></span>
                                 {% endif %}
@@ -96,29 +93,8 @@
 
             {% endfor %}
 
-            <ul class="pagination">
-{#                判断是否有上一页#}
-            {% if paginate.has_prev %}
-                <li><a href="{{ url_for('blog.blogindex') }}?curpage={{ paginate.prev_num }}">&laquo;</a></li>
-            {% endif %}
-
-{#                    遍历页码器中的页码数#}
-                        {% for pagenum in paginate.iter_pages()  %}
-                            <li {% if  pagenum == paginate.page%}class="active" {% endif %} ><a href="{{ url_for('blog.blogindex') }}?curpage={{ pagenum }}">
-                                {{ pagenum }}
-                                </a>
-                            </li>
-                        {% endfor %}
-{#                判断是否有下一页#}
-            {% if paginate.has_next %}
-                <li><a href="{{ url_for('blog.blogindex') }}?curpage={{ paginate.next_num }}">&raquo;</a></li>
-            {% endif %}
-            </ul>
-        {% else %}
-            <h3>当前还没有人发表博客 快去发布吧</h3>
-        {% endif %}
     </div>
-{% endblock %} 
+{% endblock %}
 
 
 {% block js %}

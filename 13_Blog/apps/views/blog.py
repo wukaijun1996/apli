@@ -5,6 +5,8 @@
 # @Software: PyCharm
 
 from flask import Blueprint,request,session,redirect,url_for,render_template
+from sqlalchemy import or_
+
 import urlpath
 from apps.models.blogmodels import User,Blog,Like
 from exts import db
@@ -45,16 +47,36 @@ def blogindex():
     # print(url_for('static', filename='default.jpg'))
 
     # 查询所有的博客，把它渲染在首页上
-    blogs = Blog.query.all()
-    print(blogs)
+    # blogs = Blog.query.all()
+    #     分页显示
+    """
+    page:当前页面
+    per_page：每页的数据量
+    返回的是根据设定的页码与每页显示的数据 创建的一个页码器对象
+    这个对象中：
+        items         当前页下的数据元素集合
+        page            当前页面
+        has_prev   判断是否有上一页
+        has_next   判断是否有下一页
+        prev_num  上一页的页码
+        next_num  下一页的页码
+        iter_pages() 页码器中的页码数
+
+    """
+    # 获取页码
+    curpage = int(request.args.get('curpage',1))  #当没有curpage传递的时候 拿的是第一页的数据
+
+    paginate = Blog.query.paginate(page=curpage,per_page=3)  #<flask_sqlalchemy.Pagination object at 0x000001DE14141730>
+
+    print(paginate)
     if session.get('username'):
         user = User.query.filter(User.username == session.get('username')).first()
         print(user.like_blogs)
         # 要拿到用户点过哪些博客 （列表） 传参  ， 在页面判断当前博客bid是否在列表中
         like_bids = [blog.bid for blog in user.like_blogs]
-        return render_template('new_index.html',blogs=blogs,like_bids = like_bids)
+        return render_template('new_index.html',paginate=paginate,like_bids = like_bids)
     else:
-        return render_template('new_index.html',blogs=blogs)
+        return render_template('new_index.html',paginate=paginate)
 
 
 # 设置点赞路由
@@ -100,33 +122,67 @@ def unlike():
 @blog_bp.route('/likeorunlike/')
 def likeorunlike():
 
-    if session.get('username'):
-        # 获取操作的博客id
-        bid = int(request.args.get('bid'))
-        # 根据bid获取到博客对象
-        blog = Blog.query.get(bid)
-        # 获取用户信息
-        user = User.query.filter(User.username == session.get('username')).first()
-        # 区分用户要进行点赞还是进行取消
-        flag = False
-        for like_user in blog.like_users:
-            if like_user.username == session.get('username'):
-                flag = True
-                break
-        if flag is True:
-            # 取消点赞
-            like = Like.query.filter(Like.uid == user.uid,Like.bid == bid).first()
-            db.session.delete(like)
-            db.session.commit()
-        else:
-            # 进行点赞
-            like = Like(user.uid,bid)
-            db.session.add(like)
-            db.session.commit()
-        return redirect(url_for('blog.blogindex'))
+    # if session.get('username'):
+    #     # 获取操作的博客id
+    bid = int(request.args.get('bid'))
+    # 根据bid获取到博客对象
+    blog = Blog.query.get(bid)
+    # 获取用户信息
+    user = User.query.filter(User.username == session.get('username')).first()
+    # 区分用户要进行点赞还是进行取消
+    flag = False
+    for like_user in blog.like_users:
+        if like_user.username == session.get('username'):
+            flag = True
+            break
+    if flag is True:
+        # 取消点赞
+        like = Like.query.filter(Like.uid == user.uid,Like.bid == bid).first()
+        db.session.delete(like)
+        db.session.commit()
+
+        return {'code': 201, 'likenum': len(blog.like_users)}
     else:
-        urlpath.current_url = url_for('blog.blogindex')
-        return redirect(url_for('user.login'))
+        # 进行点赞
+        like = Like(user.uid,bid)
+        db.session.add(like)
+        db.session.commit()
+    # return redirect(url_for('blog.blogindex'))
+        return {'code':200,'likenum':len(blog.like_users)}
+
+    # else:
+    #     urlpath.current_url = url_for('blog.blogindex')
+    #     return redirect(url_for('user.login'))
+
+@blog_bp.route('/userindex/')
+def userindex():
+
+    name = request.args.get('name')
+    print(name)
+    user = User.query.filter(User.username == name).first()
+    print("此人发表的所有博客有{}".format(user.blogs))
+
+    return render_template('userindex.html',blogs = user.blogs)
+
+@blog_bp.route('/search/')
+def search():
+    print(request.args)
+    # 获取要搜索的内容
+    search_content = request.args.get('search')
+    blogs = Blog.query.filter(or_(Blog.title.contains(search_content),(Blog.content.contains(search_content)))).all()
+
+    print(blogs)
+    return render_template('search.html',blogs = blogs)
+
+
+# 删除自己发表的博客
+@blog_bp.route('/deleteblog/',methods = ['POST'])
+def deleteblog():
+    print(request.form)
+    return '删除成功'
+
+
+
 
 
 
