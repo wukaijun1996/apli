@@ -179,6 +179,12 @@ def search():
 @blog_bp.route('/deleteblog/',methods = ['POST'])
 def deleteblog():
     print(request.form)
+
+    bid = int(request.form.get('bid'))
+    blog = Blog.query.get(bid)
+    db.session.delete(blog)
+    db.session.commit()
+
     return '删除成功'
 
 
