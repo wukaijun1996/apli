@@ -4,16 +4,28 @@
 # @File : 0414.py 
 # @Software: PyCharm
 
-a = ["131455"]
+# a = ["131455"]
+#
+#
+# b = 3232
+# print(len(a[0]))
+#
+# for i in a[0]:
+#     print(type(i),i)
+import os
+import datetime
 
+# case_path = os.path.join(os.getcwd(), "testsuite")
+# print(case_path)
+# case_path = os.path.join(os.path.dirname(os.path.abspath(__file__)))
+# dir1 = os.path.dirname(__file__)
+# print(case_path)
+# print(dir1)
+# print(os.path.abspath(__file__))
 
-b = 3232
-print(len(a[0]))
+# print(datetime.datetime.now())
+a = datetime.datetime.now()
+str_time = "{}-{}-{}-{}-{}-{}".format(a.year,a.month,a.day,a.hour,a.minute,a.second)
 
-for i in a[0]:
-    print(type(i),i)
-
-
-
-
+print(str_time)
 
