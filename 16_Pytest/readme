@@ -1,0 +1,10 @@
+
+
+
+pytest *.py
+
+
+识别以test开头或结尾的方法函数
+test_XX.py    XX_test.py
+
+

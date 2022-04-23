@@ -41,9 +41,14 @@ class unitMymath(unittest.TestCase):
 
 
     def test_add_3(self):
+        '''测试第3条测试用例'''
         print("我是第3条测试用例")
 
     def test_add_2(self):
+        '''
+        测试第2条测试用例
+        :return:
+        '''
         print("我是第2条测试用例")
 
     def tearDown(self) -> None:
@@ -63,7 +68,7 @@ if __name__ == '__main__':
     # 追加单个测试用例到测试集合
     # suitt.addTests(map(unitMymath,['test_add_1','test_add_3',]))
 
-    # TestLoader
+    #  TestLoader
     # loader = unittest.TestLoader()
     # suitt = loader.loadTestsFromName("unitMymath")
     # suitt = loader.loadTestsFromName("unitMymath.unitMymath")
@@ -80,6 +85,7 @@ if __name__ == '__main__':
 
     # 格式化当前时间
     cur_time = datetime.datetime.now()
+    # print(time.strftime("%Y-%m-%d-%H-%M-%S"))   or
     str_time = "{}-{}-{}-{}-{}-{}".format(cur_time.year, cur_time.month, cur_time.day, cur_time.hour, cur_time.minute, cur_time.second)
 
     #TextTestRunner（）提供的run方法运行测试集合

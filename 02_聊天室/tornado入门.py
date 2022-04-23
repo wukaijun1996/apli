@@ -29,7 +29,7 @@ def make_app():
 
 if __name__ == '__main__':
     app = make_app()
-    app.listen(8888)  #设置端口，监听端口
+    app.listen(8886)  #设置端口，监听端口
     #启动tornado
     tornado.ioloop.IOLoop.current().start()
 

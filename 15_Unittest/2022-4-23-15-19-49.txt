@@ -1,8 +1,0 @@
-test_add_1 (unitMymath.unitMymath) ... ok
-test_add_2 (unitMymath.unitMymath) ... ok
-test_add_3 (unitMymath.unitMymath) ... ok
-
-----------------------------------------------------------------------
-Ran 3 tests in 0.003s
-
-OK

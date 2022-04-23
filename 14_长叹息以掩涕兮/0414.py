@@ -28,6 +28,7 @@ import datetime
 # str_time = "{}-{}-{}-{}-{}-{}".format(a.year,a.month,a.day,a.hour,a.minute,a.second)
 #
 # print(str_time)
+import time
 
 import requests
 
@@ -49,7 +50,7 @@ Str = "da"
 print(isinstance("sa",str))
 
 
-
+print(time.strftime("%Y-%m-%d-%H-%M-%S"))
 
 
 
