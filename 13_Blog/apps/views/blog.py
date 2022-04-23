@@ -188,6 +188,27 @@ def deleteblog():
     return '删除成功'
 
 
+@blog_bp.route('/test/')
+def test1():   #利用接口直接利用接口发表博客
+    print(request.args)
+    print(User.query.filter(User.username == request.args.get('username')).first())
+    if User.query.filter(User.username == request.args.get('username')).first():
+
+    # 获取发表博客的用户
+        user = User.query.filter(User.username == request.args.get('username')).first()
+        print(request.args.get('username'))
+        title = request.args.get('title')
+        content = request.args.get('content')
+        # 创建博客对象
+        blog = Blog(title, content, user.uid)
+
+        db.session.add(blog)
+        db.session.commit()
+
+        return {'code': 201, 'publish' : "Success"}
+    else:
+        return {'code': 304, 'publish': "Fail"}
+
 
 
 

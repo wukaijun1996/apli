@@ -1,0 +1,16 @@
+test_add_1 (unitMymath.unitMymath) ... FAIL
+test_add_2 (unitMymath.unitMymath) ... ok
+test_add_3 (unitMymath.unitMymath) ... ok
+
+======================================================================
+FAIL: test_add_1 (unitMymath.unitMymath)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\apli\15_Unittest\unitMymath.py", line 31, in test_add_1
+    self.assertTrue(False,"zzz")
+AssertionError: False is not true : zzz
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.006s
+
+FAILED (failures=1)

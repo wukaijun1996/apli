@@ -1,0 +1,18 @@
+test_add_1 (unitMymath.unitMymath) ... ERROR
+test_add_2 (unitMymath.unitMymath) ... ok
+test_add_3 (unitMymath.unitMymath) ... ok
+
+======================================================================
+ERROR: test_add_1 (unitMymath.unitMymath)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\apli\15_Unittest\unitMymath.py", line 37, in test_add_1
+    self.assertIsInstance(str,"a")
+  File "C:\python38\lib\unittest\case.py", line 1333, in assertIsInstance
+    if not isinstance(obj, cls):
+TypeError: isinstance() arg 2 must be a type or tuple of types
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.006s
+
+FAILED (errors=1)

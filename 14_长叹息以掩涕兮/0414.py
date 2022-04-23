@@ -24,8 +24,45 @@ import datetime
 # print(os.path.abspath(__file__))
 
 # print(datetime.datetime.now())
-a = datetime.datetime.now()
-str_time = "{}-{}-{}-{}-{}-{}".format(a.year,a.month,a.day,a.hour,a.minute,a.second)
+# a = datetime.datetime.now()
+# str_time = "{}-{}-{}-{}-{}-{}".format(a.year,a.month,a.day,a.hour,a.minute,a.second)
+#
+# print(str_time)
 
-print(str_time)
+import requests
+
+# url = "http://127.0.0.1:5000/blog/search/"
+#
+# body = {
+#     "title":"真的是",
+#     "content": "scoipaoi上帝的嗖嗖平",
+#     "username": "wukaijun",
+# }
+#
+# res = requests.get(url,body)
+#
+# print(res.json())
+
+
+Str = "da"
+
+print(isinstance("sa",str))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
