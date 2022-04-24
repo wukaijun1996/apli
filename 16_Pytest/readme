@@ -1,10 +1,16 @@
 
 
+pip install pytest-html
+pip install pytest
 
 pytest *.py
 
 
 识别以test开头或结尾的方法函数
 test_XX.py    XX_test.py
+
+生成测试报告
+pytest **.py --html=report.html
+
 
 
