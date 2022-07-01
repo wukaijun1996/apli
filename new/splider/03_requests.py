@@ -28,3 +28,15 @@ resp = requests.get(url=url,params=parm,headers=headers)
 # print(resp.request.headers)
 print(resp.json())
 print(resp.text)
+
+    while True:
+        hasAlive = False
+        for t in gThreads:
+            if t.is_alive():
+                hasAlive = True
+                print('.',flush=True,end='')
+                time.sleep(1)
+                break
+        if not hasAlive:
+            Print('')
+            break
